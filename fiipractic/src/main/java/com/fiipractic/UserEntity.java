@@ -39,6 +39,9 @@ public class UserEntity {
         public CharSequence getPassword() {
             return null;
         }
+
+        public <T> ScopedValue<T> map(Object user) {
+        }
     }
 
 }
