@@ -21,4 +21,8 @@ public class SendRequestToWeatherService {
         return result;
 
     }
+
+    public Object getWeather(Coordinates loc) {
+        return null;
+    }
 }

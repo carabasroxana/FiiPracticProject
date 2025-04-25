@@ -3,6 +3,9 @@ package com.fiipractic;
 public class Coordinates {
     private int lat, lon;
 
+    public Coordinates(double v, double v1) {
+    }
+
     public int getLat() {
         return lat;
     }

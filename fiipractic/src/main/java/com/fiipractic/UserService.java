@@ -1,5 +1,7 @@
 package com.fiipractic;
 
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -53,4 +55,11 @@ public class UserService {
     public void deleteUserProfile(Long id) {
 
     }
+    @Cacheable(cacheNames = "profiles", key = "#id")
+    public UserProfileEntity getProfile(Long id) throws Throwable {
+        SimpleJpaRepository repo = null;
+        return (UserProfileEntity) repo.findById(id)
+                .orElseThrow(() -> new AuthorizationException("…"));
+    }
 }
+
