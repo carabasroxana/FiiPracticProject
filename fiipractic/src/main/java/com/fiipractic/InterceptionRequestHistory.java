@@ -9,19 +9,19 @@ import java.time.LocalDateTime;
 
 @Aspect
 @Component
-public class WeatherApiAspect {
+public class InterceptionRequestHistory {
 
-    private final RequestHistoryService requestHistoryService;
+    private RequestHistoryService requestHistoryService;
 
-    public WeatherApiAspect(RequestHistoryService requestHistoryService) {
+    public void WeatherApiAspect(RequestHistoryService requestHistoryService) {
         this.requestHistoryService = requestHistoryService;
     }
 
     @AfterReturning("execution(* com.fiipractic.service.WeatherService.callWeatherApi(..))")
     public void logWeatherApiCall(JoinPoint joinPoint) {
-        RequestHistory history = new RequestHistory();
+        RequestHistoryEntity history = new RequestHistoryEntity();
         history.setEndpointCalled("Weather API");
-        history.setRequestTime(LocalDateTime.now().toString()); 
+        history.setRequestTime(LocalDateTime.parse(LocalDateTime.now().toString()));
         requestHistoryService.saveRequestHistory(history);
     }
 }
